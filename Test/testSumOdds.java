@@ -7,14 +7,14 @@ public class testSumOdds {
 	@Test
 	public void equals() {
 		
-		assertEquals(25,Main.testSumOdds(10));
+		assertEquals(25,LabWorks.testSumOdds(10));
 		
 	}
 	
 	@Test
 	public void notSame() {
 		
-		assertNotSame(26,Main.testSumOdds(10));
+		assertNotSame(26,LabWorks.testSumOdds(10));
 		
 		
 	}

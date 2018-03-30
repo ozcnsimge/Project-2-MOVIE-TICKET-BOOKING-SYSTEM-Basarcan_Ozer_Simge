@@ -7,14 +7,14 @@ public class FactorialTest {
 	@Test
 	public void testEquals() {
 		
-		assertEquals(720,Main.testFactorial(6));
+		assertEquals(720,LabWorks.testFactorial(6));
 		
 	}
 	
 	@Test
 	public void testNotSame() {
 		
-		assertNotSame(719,Main.testFactorial(6));
+		assertNotSame(719,LabWorks.testFactorial(6));
 		
 	}
 

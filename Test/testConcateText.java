@@ -7,14 +7,14 @@ public class testConcateText {
 	@Test
 	public void equals() {
 		
-		assertEquals("basar ozer testingisgood",Main.testConcateText("basar ", "ozer "));
+		assertEquals("basar ozer testingisgood",LabWorks.testConcateText("basar ", "ozer "));
 		
 	}
 	
 	@Test
 public void notSame() {
 		
-		assertNotSame("basar ozer  testingisgood",Main.testConcateText("basar ", "ozer "));
+		assertNotSame("basar ozer  testingisgood",LabWorks.testConcateText("basar ", "ozer "));
 		
 	}
 
