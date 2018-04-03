@@ -2,6 +2,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 
 import javax.swing.JButton;
 
@@ -9,69 +10,78 @@ import java.awt.Dimension;
 import java.awt.CardLayout;
 import java.awt.GridLayout;
 import java.awt.Container;
+import java.awt.Container;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Color;
+import java.awt.Component;
 
 public class Main {
 	
-	static JPanel navigationStack;
-
+	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	
+	static double width = screenSize.getWidth();
+	static double height = screenSize.getHeight();
+	
+	// Creating an instance of the Navigation Stack class
+	static NavigationStack navigator = NavigationStack.getInstance();
+	
 	public Main() {
 		// TODO Auto-generated constructor stub
+		
+		
+		
 	}
 	
 	public static void addComponentsToMainFrame(Container panel) {
-	
-		 navigationStack = new JPanel(new CardLayout());
 		 
-		 JPanel welcomePage = new JPanel();
+		 // Initialize welcomePage
+		 WelcomePage welcomePg = new WelcomePage(width,height);
 		 
-		 welcomePage.setBackground(new Color(125,125,190));
+		 // Initialize loginPage
+		 LoginPage loginPage = new LoginPage(width,height);
 		 
-		 JLabel welcomeLabel = new JLabel();
+		 // Initialize signUpPage
+		 SignUpPage signUpPage = new SignUpPage(width,height);
 		 
-		 welcomeLabel.setText("Welcome to the Movie Ticket Booking");
+		 // Adding pages to the  navigator object !
+		 navigator.addPageToNavigator(welcomePg, "Welcome Page");
 		 
-		 welcomePage.add(welcomeLabel);
+		 navigator.addPageToNavigator(loginPage, "Login Page");
 		 
-		 // welcomePage.setVisible(true);
+		 navigator.addPageToNavigator(signUpPage, "SignUp Page");
 		 
-		 JButton myButton = new JButton();
-		 
-		 myButton.setText("basarcan");
-		 
-		 welcomePage.add(myButton);
-		 
-		 navigationStack.add(welcomePage," Welcome Page");
-		 
-		 panel.add(navigationStack);
+		 // Add navigator object to the Main Frame of the application...
+		 panel.add(navigator);
 		
 	}
 	
 	public static void main(String[] args) {
+		
+		// Height and width of the screen size on the device.
+		System.out.println(height);
+		System.out.println(width);
+		
 		// TODO Auto-generated method stub
 		System.out.println("Hello World");
 		
+		// Creating the main frame
 		JFrame frame = new JFrame("SE 318 Movie Ticket Management System");
 		
+		// App exits only on close
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		// Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		
-        // frame.setLocation(dim.width/2-frame.getSize().width/2-350, dim.height/2-frame.getSize().height/2-300);
         
-        //  frame.setMinimumSize(new Dimension(750, 200));
-        
-        // frame.setBackground(new Color(123, 235, 148));
-        
-        // frame.pack();
-        
+		// Full screen
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
+        // Resizable
         frame.setResizable(true);
         
+        // App will be visible
         frame.setVisible(true);
         
+        // Adding components to the Main Frame of the application...
         addComponentsToMainFrame(frame.getContentPane());
         
 	}
