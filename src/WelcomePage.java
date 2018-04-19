@@ -1,23 +1,15 @@
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-
-import java.awt.CardLayout;
-
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
 public class WelcomePage extends JPanel {
@@ -28,7 +20,7 @@ public class WelcomePage extends JPanel {
 	
 	JPanel buttonsPanel = new JPanel(new GridBagLayout());
 	
-	JLabel welcomeTitle = new JLabel("Welcome to the Movie Ticket Booking",JLabel.CENTER);
+	JLabel welcomeTitle = new JLabel();
 	
 	JButton loginButton = new JButton("Login !");
 	
@@ -46,6 +38,14 @@ public class WelcomePage extends JPanel {
 		// TODO Auto-generated constructor stub
 		
 		// Actions and some configurations...
+		
+		Font labelFont = this.welcomeTitle.getFont();
+        
+		this.welcomeTitle.setFont(new Font(labelFont.getName(),Font.PLAIN, (int)(width/50) ));
+		
+		this.welcomeTitle.setText("<html><body><nobr>"+ "Welcome To The Movie Booking" +"</nobr></body></html>");
+		
+		this.welcomeTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		this.loginButton.addActionListener(new ActionListener() {
 			
@@ -84,7 +84,7 @@ public class WelcomePage extends JPanel {
 		
 		this.setLayout(new GridBagLayout());
 		
-		this.setBackground(new Color(40,40,60));
+		this.setBackground(new Color(127,150,127));
 		
 		this.setAlignmentX(CENTER_ALIGNMENT);
 		this.setAlignmentY(CENTER_ALIGNMENT);
@@ -102,12 +102,8 @@ public class WelcomePage extends JPanel {
         gc.gridy = 1;
         gc.insets = new Insets((int) (height/30),10,30,10);
         
-        welcomeTitle.setPreferredSize(new Dimension((int) (width/10),(int) (height/12)));
-        
-        Font labelFont = welcomeTitle.getFont();
-        
-        welcomeTitle.setFont(new Font(labelFont.getName(),Font.PLAIN,20));
-        
+        // welcomeTitle.setPreferredSize(new Dimension((int) (width/10),(int) (height/12)));
+      
         this.add(welcomeTitle,gc);
         
         gc.fill = GridBagConstraints.CENTER;

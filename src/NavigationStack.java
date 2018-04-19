@@ -6,6 +6,9 @@ public class NavigationStack extends JPanel{
 	
 	private static NavigationStack instance = null;
 	
+	// The navigation stack is simply CardLayout.
+	// We put the pages inside the stack as a Card.
+	
 	public NavigationStack() {
 		// TODO Auto-generated constructor stub
 		
@@ -42,7 +45,7 @@ public class NavigationStack extends JPanel{
 	// This function enables navigator to show the requested page.
 	public void redirectTo(String pageLabel) {
 		
-		CardLayout cl = (CardLayout)(this.getLayout());
+		CardLayout cl = (CardLayout) this.getLayout();
 		
 		cl.show(this, pageLabel);
 		

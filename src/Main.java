@@ -14,11 +14,16 @@ import java.awt.Container;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.Color;
 import java.awt.Component;
 
 public class Main {
 	
+	// This is the main program of the application.
+	
+	// Getting dimensions of the screen size which the application runs on, which later helps us to
+	// serve responsive UI elements.
 	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	
 	static double width = screenSize.getWidth();
@@ -27,10 +32,11 @@ public class Main {
 	// Creating an instance of the Navigation Stack class
 	static NavigationStack navigator = NavigationStack.getInstance();
 	
+	// Creating an instance of the Database Handler class
+	static DatabaseHandler dbHandler = DatabaseHandler.getInstance();
+	
 	public Main() {
 		// TODO Auto-generated constructor stub
-		
-		
 		
 	}
 	
@@ -45,6 +51,9 @@ public class Main {
 		 // Initialize signUpPage
 		 SignUpPage signUpPage = new SignUpPage(width,height);
 		 
+		 // Initialize AdminPage
+		 AdminPage adminPage = new AdminPage(width,height);
+		 
 		 // Adding pages to the  navigator object !
 		 navigator.addPageToNavigator(welcomePg, "Welcome Page");
 		 
@@ -52,12 +61,14 @@ public class Main {
 		 
 		 navigator.addPageToNavigator(signUpPage, "SignUp Page");
 		 
+		 navigator.addPageToNavigator(adminPage, "Admin Page");
+		 
 		 // Add navigator object to the Main Frame of the application...
 		 panel.add(navigator);
 		
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
 		// Height and width of the screen size on the device.
 		System.out.println(height);
@@ -81,8 +92,27 @@ public class Main {
         // App will be visible
         frame.setVisible(true);
         
-        // Adding components to the Main Frame of the application...
-        addComponentsToMainFrame(frame.getContentPane());
+        if(dbHandler.connectToDatabase()) {
+        	
+        		System.out.println("Database connection was established succcessfully !");
+        	
+        	    // Adding components to the Main Frame of the application...
+        		// The method below helps us to add the pages and UI elements to the main of the application,
+        		// when the database connection successfully established.
+        		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                    		addComponentsToMainFrame(frame.getContentPane());
+                    }
+                });
+           
+        	
+        } else {
+        	
+        		System.out.println("Database connection was not established thus the app will exit !");
+        		
+        		System.exit(0);
+        	
+        }
         
 	}
 

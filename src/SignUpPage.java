@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,22 +19,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.JOptionPane;
 
-public class SignUpPage extends JPanel implements ActionListener{
+public class SignUpPage extends JPanel{
 	
-	// Getting the database object !
-	
+		// Getting the database object !
 		DatabaseHandler dbHandler = DatabaseHandler.getInstance();
-		
-		// Creating the components...
-		
-		JLabel loginLabel = new JLabel("Please enter the credentials !");
+	
+		// Creating the components...	
+		JLabel signUpLabel = new JLabel("Please enter the credentials !");
 		
 		JLabel userNameLabel = new JLabel("Username");
 		
 		JLabel passwordLabel = new JLabel("Password");
 		
-		JLabel passwordConfirmationLabel = new JLabel("Re-enter the password");
+		JLabel passwordConfirmationLabel = new JLabel("Confirm the password");
 		
 		JButton backButton = new JButton("Back to Main Menu");
 		
@@ -47,6 +47,8 @@ public class SignUpPage extends JPanel implements ActionListener{
 		
 		JLabel passwordMatchWarning = new JLabel("Please confirm the password !");
 		
+		JOptionPane signUpAlert = new JOptionPane();
+		
 		GridBagConstraints gc = new GridBagConstraints();
 		
 		// Getting the navigator object
@@ -55,8 +57,14 @@ public class SignUpPage extends JPanel implements ActionListener{
 	public SignUpPage(double width, double height) {
 		// TODO Auto-generated constructor stub
 		
+		Font labelFont = this.signUpLabel.getFont();
+        
+		this.signUpLabel.setFont(new Font(labelFont.getName(),Font.PLAIN,20));
+		
 		// Actions and some configurations...
-		userNameLabel.setForeground(new Color(180,180,180));
+		this.userNameLabel.setForeground(new Color(180,180,180));
+		this.passwordLabel.setForeground(new Color(180,180,180));
+		this.passwordConfirmationLabel.setForeground(new Color(180,180,180));
 				
 		userNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 				
@@ -145,6 +153,39 @@ public class SignUpPage extends JPanel implements ActionListener{
 		});
 		
 		this.passwordConfirmationInput.setHorizontalAlignment(JPasswordField.CENTER);
+		
+		this.signUpButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				if( userNameInput.getText().toString().length() == 0 || passwordInput.getPassword().toString().length() == 0 || passwordConfirmationInput.getPassword().toString().length() == 0 ) {
+					
+					System.out.println("The required fields are empty !");
+					
+					signUpAlert.showMessageDialog(null, "You did not fill all the required fields !");
+					
+				} 
+				else {
+					
+					System.out.println("The required fields are non-empty, the system will try to sign the user up !");
+					
+					if( dbHandler.signUp(userNameInput.getText().toString(), passwordInput.getText().toString() ) ) {
+						
+						signUpAlert.showMessageDialog(null, "You are registered successfully !");
+						
+					} else {
+						
+						signUpAlert.showMessageDialog(null, "Registration was not completed !");
+						
+					}
+					
+				}
+				
+			}
+			
+		});
 			
 		this.addComponentsToLoginPage(width, height);
 				
@@ -167,72 +208,60 @@ public void addComponentsToLoginPage(double width, double height) {
 		gc.gridx = 0;
 		gc.gridy = 0;
 		gc.anchor = GridBagConstraints.CENTER;
-		gc.insets = new Insets(2,0,0,2);
-		gridbagPanel.add(this.loginLabel,gc);
+		gc.insets = new Insets(5,0,0,5);
+		gridbagPanel.add(this.signUpLabel,gc);
 		
 		gc.gridx = 0;
 		gc.gridy = 1;
 		gc.anchor = GridBagConstraints.CENTER;
-		gc.insets = new Insets(2,0,0,2);
+		gc.insets = new Insets(5,0,0,5);
 		gridbagPanel.add(this.userNameLabel,gc);
 		
 		gc.gridx = 0;
 		gc.gridy = 2;
 		gc.anchor = GridBagConstraints.CENTER;
-		gc.insets = new Insets(2,0,0,2);
+		gc.insets = new Insets(5,0,0,5);
 		gridbagPanel.add(this.userNameInput,gc);
 		
 		gc.gridx = 0;
 		gc.gridy = 3;
 		gc.anchor = GridBagConstraints.CENTER;
-		gc.insets = new Insets(2,0,0,2);
+		gc.insets = new Insets(5,0,0,5);
 		gridbagPanel.add(this.passwordLabel,gc);
 		
 		gc.gridx = 0;
 		gc.gridy = 4;
 		gc.anchor = GridBagConstraints.CENTER;
-		gc.insets = new Insets(2,0,0,2);
+		gc.insets = new Insets(5,0,0,5);
 		gridbagPanel.add(this.passwordInput,gc);
 		
 		gc.gridx = 0;
 		gc.gridy = 5;
 		gc.anchor = GridBagConstraints.CENTER;
-		gc.insets = new Insets(2,0,0,2);
+		gc.insets = new Insets(5,0,0,5);
 		gridbagPanel.add(this.passwordConfirmationLabel,gc);
 		
 		gc.gridx = 0;
 		gc.gridy = 6;
 		gc.anchor = GridBagConstraints.CENTER;
-		gc.insets = new Insets(2,0,0,2);
+		gc.insets = new Insets(5,0,0,5);
 		gridbagPanel.add(this.passwordConfirmationInput,gc);
 		
 		gc.gridx = 0;
 		gc.gridy = 7;
 		gc.anchor = GridBagConstraints.CENTER;
-		gc.insets = new Insets(2,0,0,2);
+		gc.insets = new Insets(5,0,0,5);
 		gridbagPanel.add(this.passwordMatchWarning,gc);
 		
 		gc.gridx = 0;
 		gc.gridy = 8;
 		gc.anchor = GridBagConstraints.CENTER;
-		gc.insets = new Insets(2,0,0,2);
+		gc.insets = new Insets(5,0,0,5);
 		gridbagPanel.add(this.signUpButton,gc);
 		
 		mainPanel.add(gridbagPanel,BorderLayout.CENTER);
 		
 		this.add(mainPanel);
-		
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-	// TODO Auto-generated method stub
-	
-		if(this.passwordInput.getPassword().length > 1) {
-			
-			System.out.println("Aq");
-			
-		}
 		
 	}
 }
