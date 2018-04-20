@@ -55,6 +55,22 @@ public class DatabaseTest {
 	public void checkUser() {
 		assertNotEquals("Existed",dbHandler.isUsernameExists("ozeriko"));
 	}
+	
+	// Testing of checking if given movie exists on database.
+	@Test
+	public void checkMovie() {
+		assertNotEquals("Existed",dbHandler.isMovieExists("undefined movie"));
+	}
+	
+	@Test
+	public void checkRemovingUser() {
+		assertTrue(dbHandler.removeUser("ozer"));
+	}
+	
+	@Test
+	public void checkRemovingMovie() {
+		assertTrue(dbHandler.removeMovie("The Lord of the Rings"));
+	}
 
 	// Execute only once, in the end of this test code file!
 	@AfterClass
