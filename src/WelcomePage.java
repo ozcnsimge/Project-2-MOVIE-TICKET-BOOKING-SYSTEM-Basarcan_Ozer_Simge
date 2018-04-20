@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.JButton;
 
 public class WelcomePage extends JPanel {
@@ -38,6 +39,8 @@ public class WelcomePage extends JPanel {
 		// TODO Auto-generated constructor stub
 		
 		// Actions and some configurations...
+		
+		System.out.println("Welcome Page Constructor !");
 		
 		Font labelFont = this.welcomeTitle.getFont();
         
@@ -81,7 +84,6 @@ public class WelcomePage extends JPanel {
 	public void addComponents(double width, double height) {
 	
 		// Designing the frame...
-		
 		this.setLayout(new GridBagLayout());
 		
 		this.setBackground(new Color(127,150,127));
@@ -127,5 +129,6 @@ public class WelcomePage extends JPanel {
         this.add(signUpButton,gc);
 		
 	}
+	
 
 }

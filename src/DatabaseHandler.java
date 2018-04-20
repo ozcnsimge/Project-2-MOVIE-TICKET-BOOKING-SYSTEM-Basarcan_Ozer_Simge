@@ -217,5 +217,22 @@ public class DatabaseHandler {
 		
 		
 	}
+	
+	public boolean killTheConnection() {
+		
+		System.out.println("Database handler closes the connection to the database !");
+		
+		try {
+			// Kill the connection !
+			mongoClient.close();
+			
+			return true;
+			
+		} catch (Exception e) {
+			
+			return false;
+			
+		}
+	}
 
 }
