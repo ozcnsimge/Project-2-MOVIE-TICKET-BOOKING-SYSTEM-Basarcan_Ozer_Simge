@@ -37,9 +37,9 @@ public class MovieList extends JPanel {
 	JTable tableOfMovies = new JTable();
 
 	// Columns of the table
-	
+
 	String[] columnNames = { "Name of the Movie", "Price of the Ticket" };
-	
+
 	// Declaring a table with the columns, the data parameter is 0 thus we will fill
 	// it later on.
 	DefaultTableModel model = new DefaultTableModel(columnNames, 0) {
@@ -131,11 +131,18 @@ public class MovieList extends JPanel {
 			gc.anchor = GridBagConstraints.CENTER;
 			gc.insets = new Insets(2, 0, 0, 2);
 
+			// To run the below code line, we have to ensure that the each row in the
+			// collection has the properties correctly,
+			// otherwise, the app will end up with failure.
+			
+			// Getting ticket price of the movie from the each data fetched from the database
+			int ticketPriceOfTheMove = (int) movieL.get(i).get("ticketPrice");
+
 			// Getting name of the movie from the each data fetched from the database
 			String nameOfTheMovie = (String) movieL.get(i).get("name");
 
 			// Adding row to the table with the data we got in just above !
-			model.addRow(new Object[] { nameOfTheMovie, "Delete" });
+			model.addRow(new Object[] { nameOfTheMovie, ticketPriceOfTheMove });
 
 		}
 
@@ -147,6 +154,7 @@ public class MovieList extends JPanel {
 		gc.insets = new Insets(5, 0, 0, 5);
 
 		this.add(new JScrollPane(this.tableOfMovies), gc);
+		
 		// Just under the list of movies add the button that refreshes the list of the
 		// movie on click action.
 		gc.gridx = 0;

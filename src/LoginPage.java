@@ -188,127 +188,138 @@ public class LoginPage extends JPanel {
 		
 	}
 	
-	public void addComponentsToLoginPage(double width, double height) {
+	public boolean addComponentsToLoginPage(double width, double height) {
 		
-		// Initialize Panels
-		JPanel mainPanel = new JPanel(new BorderLayout());
+		try {
+			
+			// Initialize Panels
+			JPanel mainPanel = new JPanel(new BorderLayout());
+			
+			mainPanel.setBackground(new Color(127,150,127));
+			
+			JPanel userLoginPanel = new JPanel();
+			
+			JPanel managerLoginPanel = new JPanel();
+			
+			userLoginPanel.setBackground(new Color(40,40,60));
+			
+			managerLoginPanel.setBackground(new Color(40,40,60));
+			
+			this.setLayout(new BorderLayout());
+			
+			userLoginPanel.setLayout(new GridBagLayout());
+			
+			managerLoginPanel.setLayout(new GridBagLayout());
+			
+			mainPanel.add(this.backButton,BorderLayout.WEST);
+			
+			// User Login Panel
+			// starting from x=0 and y=0
+			gc.gridx = 0;
+			gc.gridy = 0;
+			gc.anchor = GridBagConstraints.CENTER;
+			gc.insets = new Insets(5,0,0,5);
+			// 5 from below and 5 from top
+			userLoginPanel.add(this.loginLabel,gc);
+			
+			gc.gridx = 0;
+			// y=1 means that this component will be shown at just below at the y=0 component
+			gc.gridy = 1;
+			gc.anchor = GridBagConstraints.CENTER;
+			gc.insets = new Insets(5,0,0,5);
+			// 5 from below and 5 from top
+			userLoginPanel.add(this.userNameLabel,gc);
+			
+			gc.gridx = 0;
+			gc.gridy = 2;
+			gc.anchor = GridBagConstraints.CENTER;
+			gc.insets = new Insets(5,0,0,5);
+			
+			userLoginPanel.add(this.userNameInput,gc);
+			
+			gc.gridx = 0;
+			gc.gridy = 3;
+			gc.anchor = GridBagConstraints.CENTER;
+			gc.insets = new Insets(5,0,0,5);
+			// 5 from below and 5 from top
+			userLoginPanel.add(this.passwordLabel,gc);
+			
+			gc.gridx = 0;
+			gc.gridy = 4;
+			gc.anchor = GridBagConstraints.CENTER;
+			gc.insets = new Insets(5,0,0,5);
+			// 5 from below and 5 from top
+			userLoginPanel.add(this.passwordInput,gc);
+			
+			gc.gridx = 0;
+			gc.gridy = 5;
+			gc.anchor = GridBagConstraints.CENTER;
+			gc.insets = new Insets(5,0,0,5);
+			// 5 from below and 5 from top
+			userLoginPanel.add(this.loginButton,gc);
+			
+			// Manager Login Panel
+			gc.gridx = 0;
+			gc.gridy = 0;
+			gc.anchor = GridBagConstraints.CENTER;
+			gc.insets = new Insets(5,0,0,5);
+			// 5 from below and 5 from top
+			managerLoginPanel.add(this.managerLoginLabel,gc);
+			
+			gc.gridx = 0;
+			gc.gridy = 1;
+			gc.anchor = GridBagConstraints.CENTER;
+			gc.insets = new Insets(5,0,0,5);
+			// 5 from below and 5 from top
+			managerLoginPanel.add(this.managerUserNameLabel,gc);
+			
+			gc.gridx = 0;
+			gc.gridy = 2;
+			gc.anchor = GridBagConstraints.CENTER;
+			gc.insets = new Insets(5,0,0,5);
+			// 5 from below and 5 from top
+			managerLoginPanel.add(this.managerUserNameInput,gc);
+			
+			gc.gridx = 0;
+			gc.gridy = 3;
+			gc.anchor = GridBagConstraints.CENTER;
+			gc.insets = new Insets(5,0,0,5);
+			// 5 from below and 5 from top
+			managerLoginPanel.add(this.managerPasswordLabel,gc);
+			
+			gc.gridx = 0;
+			gc.gridy = 4;
+			gc.anchor = GridBagConstraints.CENTER;
+			gc.insets = new Insets(5,0,0,5);
+			// 5 from below and 5 from top
+			managerLoginPanel.add(this.managerPasswordInput,gc);
+			
+			gc.gridx = 0;
+			gc.gridy = 5;
+			gc.anchor = GridBagConstraints.CENTER;
+			gc.insets = new Insets(5,0,0,5);
+			// 5 from below and 5 from top
+			managerLoginPanel.add(this.managerLoginButton,gc);
+			
+			// Adding Panels to the tabs !
+			this.loginTabs.addTab("User Login", userLoginPanel);
+			
+			this.loginTabs.addTab("Manager Login", managerLoginPanel);
+			
+			// Adding Tab Panel to the Main Panel
+			mainPanel.add(loginTabs,BorderLayout.CENTER);
+			
+			// Create the main Panel
+			this.add(mainPanel);
+			
+			return true;
+			
+		} catch (Exception e) {
+			
+			throw new RuntimeException(e);
+			
+		}
 		
-		mainPanel.setBackground(new Color(127,150,127));
-		
-		JPanel userLoginPanel = new JPanel();
-		
-		JPanel managerLoginPanel = new JPanel();
-		
-		userLoginPanel.setBackground(new Color(40,40,60));
-		
-		managerLoginPanel.setBackground(new Color(40,40,60));
-		
-		this.setLayout(new BorderLayout());
-		
-		userLoginPanel.setLayout(new GridBagLayout());
-		
-		managerLoginPanel.setLayout(new GridBagLayout());
-		
-		mainPanel.add(this.backButton,BorderLayout.WEST);
-		
-		// User Login Panel
-		// starting from x=0 and y=0
-		gc.gridx = 0;
-		gc.gridy = 0;
-		gc.anchor = GridBagConstraints.CENTER;
-		gc.insets = new Insets(5,0,0,5);
-		// 5 from below and 5 from top
-		userLoginPanel.add(this.loginLabel,gc);
-		
-		gc.gridx = 0;
-		// y=1 means that this component will be shown at just below at the y=0 component
-		gc.gridy = 1;
-		gc.anchor = GridBagConstraints.CENTER;
-		gc.insets = new Insets(5,0,0,5);
-		// 5 from below and 5 from top
-		userLoginPanel.add(this.userNameLabel,gc);
-		
-		gc.gridx = 0;
-		gc.gridy = 2;
-		gc.anchor = GridBagConstraints.CENTER;
-		gc.insets = new Insets(5,0,0,5);
-		
-		userLoginPanel.add(this.userNameInput,gc);
-		
-		gc.gridx = 0;
-		gc.gridy = 3;
-		gc.anchor = GridBagConstraints.CENTER;
-		gc.insets = new Insets(5,0,0,5);
-		// 5 from below and 5 from top
-		userLoginPanel.add(this.passwordLabel,gc);
-		
-		gc.gridx = 0;
-		gc.gridy = 4;
-		gc.anchor = GridBagConstraints.CENTER;
-		gc.insets = new Insets(5,0,0,5);
-		// 5 from below and 5 from top
-		userLoginPanel.add(this.passwordInput,gc);
-		
-		gc.gridx = 0;
-		gc.gridy = 5;
-		gc.anchor = GridBagConstraints.CENTER;
-		gc.insets = new Insets(5,0,0,5);
-		// 5 from below and 5 from top
-		userLoginPanel.add(this.loginButton,gc);
-		
-		// Manager Login Panel
-		gc.gridx = 0;
-		gc.gridy = 0;
-		gc.anchor = GridBagConstraints.CENTER;
-		gc.insets = new Insets(5,0,0,5);
-		// 5 from below and 5 from top
-		managerLoginPanel.add(this.managerLoginLabel,gc);
-		
-		gc.gridx = 0;
-		gc.gridy = 1;
-		gc.anchor = GridBagConstraints.CENTER;
-		gc.insets = new Insets(5,0,0,5);
-		// 5 from below and 5 from top
-		managerLoginPanel.add(this.managerUserNameLabel,gc);
-		
-		gc.gridx = 0;
-		gc.gridy = 2;
-		gc.anchor = GridBagConstraints.CENTER;
-		gc.insets = new Insets(5,0,0,5);
-		// 5 from below and 5 from top
-		managerLoginPanel.add(this.managerUserNameInput,gc);
-		
-		gc.gridx = 0;
-		gc.gridy = 3;
-		gc.anchor = GridBagConstraints.CENTER;
-		gc.insets = new Insets(5,0,0,5);
-		// 5 from below and 5 from top
-		managerLoginPanel.add(this.managerPasswordLabel,gc);
-		
-		gc.gridx = 0;
-		gc.gridy = 4;
-		gc.anchor = GridBagConstraints.CENTER;
-		gc.insets = new Insets(5,0,0,5);
-		// 5 from below and 5 from top
-		managerLoginPanel.add(this.managerPasswordInput,gc);
-		
-		gc.gridx = 0;
-		gc.gridy = 5;
-		gc.anchor = GridBagConstraints.CENTER;
-		gc.insets = new Insets(5,0,0,5);
-		// 5 from below and 5 from top
-		managerLoginPanel.add(this.managerLoginButton,gc);
-		
-		// Adding Panels to the tabs !
-		this.loginTabs.addTab("User Login", userLoginPanel);
-		
-		this.loginTabs.addTab("Manager Login", managerLoginPanel);
-		
-		// Adding Tab Panel to the Main Panel
-		mainPanel.add(loginTabs,BorderLayout.CENTER);
-		
-		// Create the main Panel
-		this.add(mainPanel);
 		
 	}
 

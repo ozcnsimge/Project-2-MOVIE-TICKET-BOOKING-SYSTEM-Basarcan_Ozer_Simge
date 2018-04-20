@@ -23,7 +23,11 @@ public class AddMovie extends JPanel {
 
 	JLabel addMovieLabel = new JLabel("Enter the name of the movie :", SwingConstants.CENTER);
 
+	JLabel movieTicketPriceLabel = new JLabel("Enter the ticket price of the movie :", SwingConstants.CENTER);
+
 	JTextField movieNameInput = new JTextField(25);
+
+	JTextField movieTicketPrice = new JTextField(25);
 
 	JButton addMovieButton = new JButton("Add Movie");
 
@@ -41,6 +45,8 @@ public class AddMovie extends JPanel {
 		this.addMovieLabel.setForeground(new Color(40, 40, 75));
 
 		this.movieNameInput.setHorizontalAlignment(SwingConstants.CENTER);
+
+		this.movieTicketPrice.setHorizontalAlignment(SwingConstants.CENTER);
 
 		this.addMovieButton.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -73,6 +79,25 @@ public class AddMovie extends JPanel {
 			}
 
 		});
+
+		// Adding action to the movie ticket price input
+		this.movieTicketPrice.addKeyListener(new KeyAdapter() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+
+				if (!Character.isDigit(c)) {
+					e.consume();
+				}
+
+				if (movieTicketPrice.getText().length() >= 2) {
+					e.consume();
+				}
+
+			}
+		});
+
 		// Adding action to the button
 		this.addMovieButton.addActionListener(new ActionListener() {
 
@@ -81,18 +106,21 @@ public class AddMovie extends JPanel {
 				// TODO Auto-generated method stub
 
 				// Checking the length of the movie name input is longer than 2.
-				// We cannot let the user to add a movie named empty string !
-				if (movieNameInput.getText().length() < 2) {
+				// We cannot let the user to add a movie named empty string or empty string ticket price
+				if (movieNameInput.getText().length() < 2 || movieTicketPrice.getText().toString().equals("")) {
 
 					// Showing a dialog to inform the user about the function.
-					addMovieAlert.showMessageDialog(null, "It is a really short name for a movie !");
-					
+					addMovieAlert.showMessageDialog(null, "It is a really short name or empty ticket price for a movie !");
+
 					// Setting the input to an empty string
 					movieNameInput.setText("");
+					movieTicketPrice.setText("");
 
 				} else {
 					// Checking if the adding movie function operated successfully or not
-					if (dbHandler.addMovie(movieNameInput.getText().toString())) {
+					// Here, we cast the movie ticket price string to the integer type to continue
+					if (dbHandler.addMovie(movieNameInput.getText().toString(),
+							Integer.parseInt(movieTicketPrice.getText()))) {
 
 						// Showing a dialog to inform the user about the function.
 						addMovieAlert.showMessageDialog(null,
@@ -100,6 +128,7 @@ public class AddMovie extends JPanel {
 
 						// Setting the input to an empty string
 						movieNameInput.setText("");
+						movieTicketPrice.setText("");
 
 					} else {
 
@@ -109,6 +138,7 @@ public class AddMovie extends JPanel {
 
 						// Setting the input to an empty string.
 						movieNameInput.setText("");
+						movieTicketPrice.setText("");
 
 					}
 				}
@@ -144,6 +174,22 @@ public class AddMovie extends JPanel {
 
 		gc.gridx = 0;
 		gc.gridy = 2;
+		gc.anchor = GridBagConstraints.CENTER;
+		// insets are basically places a margin around the
+		gc.insets = new Insets(5, 0, 0, 5);
+		// 5 from below and 5 from top
+		this.add(this.movieTicketPriceLabel, gc);
+
+		gc.gridx = 0;
+		gc.gridy = 3;
+		gc.anchor = GridBagConstraints.CENTER;
+		// insets are basically places a margin around the
+		gc.insets = new Insets(5, 0, 0, 5);
+		// 5 from below and 5 from top
+		this.add(this.movieTicketPrice, gc);
+
+		gc.gridx = 0;
+		gc.gridy = 4;
 		gc.anchor = GridBagConstraints.CENTER;
 		// 5 from below and 5 from top
 		gc.insets = new Insets(5, 0, 0, 5);
