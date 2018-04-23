@@ -4,9 +4,7 @@
 	<classpathentry kind="src" path="Test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="/Users/ozcnsimge/Documents/GitHub/Project-2-MOVIE-TICKET-BOOKING-SYSTEM-Basarcan_Ozer_Simge/mongo-java-driver-3.6.0-rc0.jar"/>
-	<classpathentry kind="lib" path="/Users/ozcnsimge/Documents/GitHub/Project-2-MOVIE-TICKET-BOOKING-SYSTEM-Basarcan_Ozer_Simge/mongo-java-driver-3.6.0-rc0-sources.jar"/>
-	<classpathentry kind="lib" path="mongo-java-driver-3.6.0-rc0-sources.jar"/>
-	<classpathentry kind="lib" path="mongo-java-driver-3.6.0-rc0.jar"/>
+	<classpathentry kind="lib" path="/Users/ozercevikaslan/Downloads/Project-2-MOVIE-TICKET-BOOKING-SYSTEM-Basarcan_Ozer_Simge-master/mongo-java-driver-3.6.0-rc0.jar"/>
+	<classpathentry kind="lib" path="/Users/ozercevikaslan/Downloads/Project-2-MOVIE-TICKET-BOOKING-SYSTEM-Basarcan_Ozer_Simge-master/mongo-java-driver-3.6.0-rc0-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

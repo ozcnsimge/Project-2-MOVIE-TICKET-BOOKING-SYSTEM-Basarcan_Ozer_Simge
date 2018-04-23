@@ -25,6 +25,7 @@ public class UIComponentTest {
 
 	static LoginPage lp = new LoginPage(width, height);
 	static SignUpPage sp = new SignUpPage(width, height);
+	static AddMovie addMoviePage = new AddMovie();
 
 	static NavigationStack navigator;
 
@@ -99,6 +100,28 @@ public class UIComponentTest {
 			sp.addComponentsToSignUpPage(width, height);
 			assertNotNull(sp.navigator);
 		}
+	}
+	
+	public static class AddMoviePageTests{
+	
+		@Test
+		public void addMovieButton() {
+			addMoviePage.addComponentsToPanel();
+			assertNotNull(addMoviePage.addMovieButton);
+		}
+		
+		@Test
+		public void addMovieTextInput() {
+			addMoviePage.addComponentsToPanel();
+			assertNotNull(addMoviePage.movieNameInput);
+		}
+		
+		@Test
+		public void ticketPriceInput() {
+			addMoviePage.addComponentsToPanel();
+			assertNotNull(addMoviePage.movieTicketPrice);
+		}
+		
 	}
 
 	public static class NavigatorTests {
