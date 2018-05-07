@@ -1,5 +1,7 @@
 import javax.swing.JPanel;
 import java.awt.CardLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 public class NavigationStack extends JPanel {
 
@@ -7,9 +9,17 @@ public class NavigationStack extends JPanel {
 	// within the application.
 
 	private static NavigationStack instance = null;
+	
+	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+	static double width = screenSize.getWidth();
+	static double height = screenSize.getHeight();
 
 	// The navigation stack is simply CardLayout.
 	// We put the pages inside the stack as a Card.
+	
+	// We save chosen movie id here so that we can show its sessions.
+	public String choosenMovieName = "";
 
 	public NavigationStack() {
 		// TODO Auto-generated constructor stub
@@ -75,6 +85,35 @@ public class NavigationStack extends JPanel {
 
 		}
 
+	}
+	
+	public boolean redirectToTheater(String movieName) {
+		
+		this.choosenMovieName = movieName;
+		
+		System.out.println("User wants to see the available seats for the movie named : "+this.choosenMovieName);
+		
+		try {
+			
+			// Initialize Movie Theater Page to choose the seat
+			MovieTheaterPage movieTheaterPage = new MovieTheaterPage(width, height);
+			
+			this.addPageToNavigator(movieTheaterPage, "Movie Theater Page");
+			
+			CardLayout cl = (CardLayout) (this.getLayout());
+
+			cl.show(this, "Movie Theater Page");
+
+			return true;
+			
+		} catch (Exception e) {
+			
+			System.out.println(e);
+
+			throw new RuntimeException(e);
+			
+		}
+		
 	}
 
 }

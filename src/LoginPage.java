@@ -174,6 +174,8 @@ public class LoginPage extends JPanel {
 					
 					loginAlert.showMessageDialog(null, "Login is successful !");
 					
+					navigator.redirectTo("Movies Page");
+					
 				} else {
 					
 					loginAlert.showMessageDialog(null, "Wrong credentials !");

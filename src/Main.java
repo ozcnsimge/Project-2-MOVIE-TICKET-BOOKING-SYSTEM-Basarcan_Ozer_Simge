@@ -57,9 +57,15 @@ public class Main {
 
 			// Initialize signUpPage
 			SignUpPage signUpPage = new SignUpPage(width, height);
+			
+			// Initialize Movies Page for user to choose a movie and then buy the ticket
+			MoviesPage moviesPage = new MoviesPage(width, height);
 
 			// Initialize AdminPage
 			AdminPage adminPage = new AdminPage(width, height);
+			
+			// Initiailize Payment Page
+			PaymentPage paymentPage = new PaymentPage(width, height);
 
 			// Adding pages to the navigator object !
 			navigator.addPageToNavigator(welcomePg, "Welcome Page");
@@ -67,6 +73,10 @@ public class Main {
 			navigator.addPageToNavigator(loginPage, "Login Page");
 
 			navigator.addPageToNavigator(signUpPage, "SignUp Page");
+			
+			navigator.addPageToNavigator(moviesPage, "Movies Page");
+			
+			navigator.addPageToNavigator(paymentPage, "Payment Page");
 
 			navigator.addPageToNavigator(adminPage, "Admin Page");
 
@@ -115,6 +125,7 @@ public class Main {
 			javax.swing.SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
 					addComponentsToMainFrame(frame.getContentPane());
+					frame.pack();
 				}
 			});
 

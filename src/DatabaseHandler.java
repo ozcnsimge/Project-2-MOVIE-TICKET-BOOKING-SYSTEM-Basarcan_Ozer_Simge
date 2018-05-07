@@ -8,7 +8,9 @@ import com.mongodb.DBObject;
 import java.util.List;
 import java.util.Set;
 
+import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
+import com.mongodb.BulkWriteOperation;
 
 // Singleton Pattern is being used in this method due to avoid further extra connection processes.
 
@@ -24,6 +26,8 @@ public class DatabaseHandler {
 	private static DBCollection moviesCollection;
 
 	private static DB myDatabase;
+	
+	private static User user;
 
 	public DatabaseHandler() {
 
@@ -90,6 +94,8 @@ public class DatabaseHandler {
 			if (cursor.size() >= 1) {
 
 				DBObject user = cursor.next();
+				
+				this.user = new User(username);
 
 				System.out.println(user);
 
@@ -122,11 +128,14 @@ public class DatabaseHandler {
 			// Preparing the query
 			BasicDBObject newUser = new BasicDBObject();
 
+			BasicDBList purchasedTickets = new BasicDBList();
+		
+			
 			// Assigning the parameters to the query
 			newUser.put("username", username);
-
 			newUser.put("password", password);
-
+			newUser.put("purchasedTickets", purchasedTickets);
+			
 			// Inserting the user to the database
 			usersCollection.insert(newUser);
 
@@ -142,6 +151,39 @@ public class DatabaseHandler {
 		}
 
 	}
+	
+	public boolean buyTicket(String movieName) {
+		
+		try {
+			
+			System.out.println("The user wants to buy a ticket : "+this.user.getUsername());
+			
+			// Search the query in the database
+			DBObject foundUser = usersCollection
+				.find(new BasicDBObject("username", this.user.getUsername())).next();
+			
+			// data
+			BasicDBObject purchasedTicket = new BasicDBObject();
+			purchasedTicket.append("purchasedTicket", movieName);
+			
+			DBObject listItem = new BasicDBObject("purchasedTickets",purchasedTicket);
+			
+			DBObject updateQuery = new BasicDBObject("$push", listItem);
+
+			usersCollection.update(foundUser, updateQuery);
+			
+			return true;
+			
+		} catch(Exception e) {
+			
+			System.out.println(
+					"Error occured in buying a ticket of the movie to the database due to the following error message : " + e);
+
+			throw new RuntimeException(e);
+			
+		}
+		
+	}
 
 	// This function lets the manager to add new movies to the application.
 	public boolean addMovie(String movieName, int ticketPrice) {
@@ -156,7 +198,14 @@ public class DatabaseHandler {
 			// Assigning the parameters to the query
 			newMovie.put("name", movieName);
 			newMovie.put("ticketPrice", ticketPrice);
-
+			
+			BasicDBList sessions = new BasicDBList();
+			sessions.add(new BasicDBObject("hour","09.00-11.00"));
+			sessions.add(new BasicDBObject("hour","13.00-15.00"));
+			sessions.add(new BasicDBObject("hour","17.00-19.00"));
+			
+			newMovie.put("sessions", sessions);
+			
 			moviesCollection.insert(newMovie);
 
 			return true;
@@ -223,7 +272,7 @@ public class DatabaseHandler {
 	// Removes an existed movie from the database.
 		public boolean removeMovie(String movieName) {
 
-			System.out.println("Database handler is trying to remove the user from the database !");
+			System.out.println("Database handler is trying to remove the movie from the database !");
 
 			try {
 
@@ -231,7 +280,7 @@ public class DatabaseHandler {
 				BasicDBObject movie = new BasicDBObject();
 
 				// Assigning the parameters to the query
-				movie.put("username", movieName);
+				movie.put("name", movieName);
 
 				// This function firstly runs the query to find the object in the database and
 				// then removes the object from the database.

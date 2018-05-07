@@ -122,48 +122,21 @@ public class MovieList extends JPanel {
 		// !
 		this.cleanTheTableModel();
 
-		int i;
-
-		for (i = 0; i < movieL.size(); i++) {
-
-			gc.gridx = 0;
-			gc.gridy = i;
-			gc.anchor = GridBagConstraints.CENTER;
-			gc.insets = new Insets(2, 0, 0, 2);
-
-			// To run the below code line, we have to ensure that the each row in the
-			// collection has the properties correctly,
-			// otherwise, the app will end up with failure.
-			
-			// Getting ticket price of the movie from the each data fetched from the database
-			int ticketPriceOfTheMove = (int) movieL.get(i).get("ticketPrice");
-
-			// Getting name of the movie from the each data fetched from the database
-			String nameOfTheMovie = (String) movieL.get(i).get("name");
-
-			// Adding row to the table with the data we got in just above !
-			model.addRow(new Object[] { nameOfTheMovie, ticketPriceOfTheMove });
-
-		}
-
-		this.tableOfMovies.setModel(model);
-
-		gc.gridx = 0;
-		gc.gridy = i + 1;
-		gc.anchor = GridBagConstraints.CENTER;
-		gc.insets = new Insets(5, 0, 0, 5);
-
-		this.add(new JScrollPane(this.tableOfMovies), gc);
-		
+		MovieListTable tableBtn = new MovieListTable(movieL);
 		// Just under the list of movies add the button that refreshes the list of the
 		// movie on click action.
 		gc.gridx = 0;
-		gc.gridy = i + 2;
+		gc.gridy = 1;
 		gc.anchor = GridBagConstraints.CENTER;
 		gc.insets = new Insets(5, 0, 0, 5);
-
-		this.add(this.refreshMoviesButton, gc);
-
+		this.add(tableBtn, gc);
+		// Just under the list of movies add the button that refreshes the list of the
+		// movie on click action.
+		gc.gridx = 0;
+		gc.gridy = 2;
+		gc.anchor = GridBagConstraints.CENTER;
+		gc.insets = new Insets(5, 0, 0, 5);
+		this.add(refreshMoviesButton, gc);
 		// Re adding all elements to the main panel
 		this.revalidate();
 
