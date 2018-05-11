@@ -71,6 +71,13 @@ public class DatabaseTest {
 	public void checkRemovingMovie() {
 		assertTrue(dbHandler.removeMovie("The Lord of the Rings"));
 	}
+	
+	@Test
+	public void buyTicket() {
+		String movieName = "Infinity Wars";
+		dbHandler.logIn("serhat", "123");
+		assertTrue(dbHandler.buyTicket(movieName));
+	}
 
 	// Execute only once, in the end of this test code file!
 	@AfterClass
